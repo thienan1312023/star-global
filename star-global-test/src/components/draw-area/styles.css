@@ -5,8 +5,9 @@
   .container {
     padding: 0 15px;
     margin: 0 auto;
-    max-width: 1024px;
+    max-width: 1280px;
     width: 100%;
+    border: 2px solid #3384b3;
   }
   
   .btn {
@@ -61,8 +62,24 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     background-color: #5fc4e2;
     border: 1px solid #333;
+  }
+  .draw-infor{
+    margin-top: 1em;
+  }
+  .draw-infor >span{
+    margin-right: 1em;
+  }
+  .draw-infor span{
+    font-style: italic;
+  }
+  span.draw-infor-value{
+    color: blue;
+  }
+  .infor-row{
+    line-height: 25px;
+    margin: 15px 0;
   }
