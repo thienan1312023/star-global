@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCoordinateAndTimeSpeed } from '../../actions';
-import { BoxWidth, BoxHeight } from './constants';
+import { BoxWidth, BoxHeight, XDefault, YDefault, TransitionTimeDefault } from './constants';
+import './styles.css';
+
 const DrawControl = () => {
     const ww = window.innerWidth;
     const wh = window.innerHeight;
-    const [transitionSpeed, setTransitionSpeed] = useState(1000)
+    const [transitionSpeed, setTransitionSpeed] = useState(TransitionTimeDefault)
     const [{ x, y }, setPosition] = useState({ x: 0, y: 0 });
     const dispatch = useDispatch();
 
@@ -32,11 +34,11 @@ const DrawControl = () => {
         }
     };
 
-    const handleReset = (e) => {
+    const handleResetControlOptions = (e) => {
         e.stopPropagation();
         setTransitionSpeed(1000);
-        setPosition({ x: 0, y: 0 });
-        dispatch(setCoordinateAndTimeSpeed({x: 0,y: 0, transitionSpeed: 1000}));
+        setPosition({ x: XDefault, y: YDefault });
+        dispatch(setCoordinateAndTimeSpeed({x: 0,y: 0, transitionSpeed: TransitionTimeDefault}));
     };
 
     useEffect(() => {
@@ -56,8 +58,8 @@ const DrawControl = () => {
         />
         <button
             type="button"
-            className="btn"
-            onClick={handleReset}
+            className="btn-reset"
+            onClick={handleResetControlOptions}
         >
             Reset
         </button>

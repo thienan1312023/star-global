@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import DrawObject from '../draw-object';
 import DrawControl from '../draw-control';
 import './styles.css'
@@ -18,4 +19,9 @@ const DrawArea = ({ x, y, transitionSpeed }) => {
     );
 }
 
+DrawArea.propTypes = {
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired,
+    transitionSpeed: PropTypes.number.isRequired,
+}
 export default DrawArea;

@@ -1,6 +1,5 @@
 import {
     SET_COORDINATES_AND_TIME_SPEED,
-    SET_RESET
 } from '../constants/actionTypes'
 
 const initialState = {
@@ -14,11 +13,6 @@ export default (state = initialState.addedIds, action) => {
             return {
                 ...state,
                 drawOptions: action.payload
-            }
-        case SET_RESET:
-            return {
-                ...state,
-                drawOptions: {}
             }
       default:
             return state
