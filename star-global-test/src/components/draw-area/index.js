@@ -9,8 +9,8 @@ const DrawArea = ({ x, y, transitionSpeed }) => {
             <div className="container">
                 <DrawControl />
                 <div className="draw-infor">
+                    Speed Of Transition:    <span className="draw-infor-value">{transitionSpeed / 1000}s</span>
                     Position:  <span className="draw-infor-value">({x},{y})</span>
-                Speed Of Transition:    <span className="draw-infor-value">{transitionSpeed / 1000}s</span>
                 </div>
                 <div className="infor-row">Click any where on this area to move the box</div>
                 <DrawObject x={x} y={y} transitionSpeed={transitionSpeed} />

@@ -1,10 +1,13 @@
 import {
     SET_COORDINATES_AND_TIME_SPEED,
 } from '../constants/actionTypes'
-
+import {XDefault, YDefault, TransitionTimeDefault} from '../components/draw-control/constants';
 const initialState = {
-    drawOptions: {},
-    quantityById: {},
+    drawOptions: {
+        x: XDefault,
+        y: YDefault,
+        transitionSpeed: TransitionTimeDefault
+    },
 }
 
 export default (state = initialState.addedIds, action) => {

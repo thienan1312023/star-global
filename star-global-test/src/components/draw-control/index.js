@@ -5,50 +5,54 @@ import { BoxWidth, BoxHeight, XDefault, YDefault, TransitionTimeDefault } from '
 import './styles.css';
 
 const DrawControl = () => {
-    const ww = window.innerWidth;
-    const wh = window.innerHeight;
+    const widthWindow = window.innerWidth;
+    const windowHeight = window.innerHeight;
     const [transitionSpeed, setTransitionSpeed] = useState(TransitionTimeDefault)
-    const [{ x, y }, setPosition] = useState({ x: 0, y: 0 });
+    const [{ x, y }, setPosition] = useState({ x: XDefault, y: YDefault });
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        document.addEventListener('click', handleClick, false)
+        return () => {
+            document.removeEventListener('click', handleClick, false);
+        }
+    });
+
     const handleClick = ({ x, y }) => {
-        if (x + BoxWidth > ww) {
-            x = ww - BoxWidth;
+        if (x + BoxWidth > widthWindow) {
+            x = widthWindow - BoxWidth;
         }
 
-        if (y + BoxHeight > wh) {
-            y = wh - BoxHeight;
+        if (y + BoxHeight > windowHeight) {
+            y = windowHeight - BoxHeight;
         }
+
         setPosition({
             x,
             y
         });
+
         dispatch(setCoordinateAndTimeSpeed({x,y, transitionSpeed}));
+    };
+
+    const handleResetControlOptions = (e) => {
+        e.stopPropagation();
+        setTransitionSpeed(TransitionTimeDefault);
+        setPosition({ x: XDefault, y: YDefault });
+        dispatch(setCoordinateAndTimeSpeed({x: XDefault,y: YDefault, transitionSpeed: TransitionTimeDefault}));
     };
 
     const handleInputChange = e => {
         const { value } = e.target;
         if (Number.isInteger(+value)) {
-            setTransitionSpeed(e.target.value);
-            dispatch(setCoordinateAndTimeSpeed({x,y, transitionSpeed: e.target.value}));
+            const targetValue = e.target.value;
+            setTransitionSpeed(targetValue);
+            dispatch(setCoordinateAndTimeSpeed({x,y, transitionSpeed: targetValue}));
         }
     };
 
-    const handleResetControlOptions = (e) => {
-        e.stopPropagation();
-        setTransitionSpeed(1000);
-        setPosition({ x: XDefault, y: YDefault });
-        dispatch(setCoordinateAndTimeSpeed({x: 0,y: 0, transitionSpeed: TransitionTimeDefault}));
-    };
-
-    useEffect(() => {
-        document.addEventListener('click', handleClick)
-        return () => {
-            document.removeEventListener('click', handleClick);
-        }
-    });
     return (<div className="form-group">
-        <div className="form-label">Transition speed</div>
+        <div className="form-label">Transition speed (ms)</div>
         <input
             type="text"
             className="form-input"
